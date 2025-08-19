@@ -1,0 +1,14 @@
+node_modules
+/dashboard
+/extension
+/graphics
+types/schemas
+
+/assets
+/cfg
+/shared/dist
+/db
+/logs
+
+# tsbuildinfo
+*.tsbuildinfo

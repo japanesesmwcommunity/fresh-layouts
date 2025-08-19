@@ -1,0 +1,10 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"text": {"type": "string", "default": "default"},
+		"age": {"type": "number", "default": 1000}
+	},
+	"required": ["text", "age"]
+}
