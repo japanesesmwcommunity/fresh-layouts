@@ -1,0 +1,17 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"id": {"type": "number"},
+		"title": {"type": "string"},
+		"runners": {
+			"type": "array",
+			"items": {
+				"$ref": "./runner.json"
+			}
+		},
+		"timestamp": {"type": "string", "format": "date-time"}
+	},
+	"required": ["id", "title", "timestamp", "runners"]
+}

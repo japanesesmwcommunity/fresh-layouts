@@ -1,0 +1,24 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"id": {
+			"type": "number"
+		},
+		"name": {
+			"type": "string"
+		},
+		"twitchId": {
+			"type": "string"
+		},
+		"message": {
+			"type": "string"
+		},
+		"finishTime": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"required": ["id", "name"]
+}

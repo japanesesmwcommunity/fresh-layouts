@@ -9,7 +9,7 @@ export default defineConfig(() => {
 		plugins: [
 			react(),
 			nodecg({
-				bundleName: "nodecg-react-template",
+				bundleName: "fresh-layouts",
 				graphics: "./src/browser/graphics/views/**/*.tsx",
 				dashboard: "./src/browser/dashboard/views/**/*.tsx",
 				extension: {

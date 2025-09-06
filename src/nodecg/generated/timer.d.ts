@@ -6,7 +6,9 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export interface Configschema {
-	googleApiKey?: string;
-	spreadsheetId?: string;
+export interface Timer {
+	raw: number;
+	timeAtPaused: number;
+	state: 'NotRunning' | 'Running' | 'Paused';
+	formattedTime: string;
 }
