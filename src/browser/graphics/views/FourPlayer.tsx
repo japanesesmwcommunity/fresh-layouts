@@ -106,7 +106,7 @@ const FourPlayer = () => {
 			<Timer
 				x={35}
 				y={825}
-				fontSize={96}
+				fontSize={90}
 			/>
 			<Footer>RTA新人大会 自称新人の部 - {currentRun?.title}</Footer>
 		</Overlay>
