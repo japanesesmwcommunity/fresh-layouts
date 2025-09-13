@@ -8,6 +8,7 @@ import {Footer} from "../components/Footer";
 import {InfoBox} from "../components/InfoBox";
 import {Logo} from "../components/Logo";
 import {Nameplate} from "../components/Nameplate";
+import {RunnerMessages} from "../components/RunnerMessages";
 import {Timer} from "../components/Timer";
 import {Box, calculateClipPath} from "../util/clipPath";
 import {Overlay} from "./OverlayTemplate";
@@ -27,7 +28,7 @@ const ThreePlayer = () => {
 			// 上段右（右寄せ）
 			return {
 				game: {
-					x: GAME_OFFSET_X + GAME_WIDTH + GAP,
+					x: GAME_OFFSET_X,
 					y: 15,
 					width: GAME_WIDTH,
 					height: GAME_HEIGHT,
@@ -40,17 +41,16 @@ const ThreePlayer = () => {
 			};
 		} else if (playerIndex === 1) {
 			// 下段左
-			const bottomY = 15 + GAME_HEIGHT + 80 + GAP; // 上段 + nameplate高さ + ギャップ
 			return {
 				game: {
-					x: GAME_OFFSET_X,
-					y: bottomY,
+					x: GAME_OFFSET_X + GAP + GAME_WIDTH,
+					y: 15,
 					width: GAME_WIDTH,
 					height: GAME_HEIGHT,
 				},
 				nameplate: {
 					x: GAME_OFFSET_X,
-					y: bottomY + GAME_HEIGHT + NAMEPLATE_OFFSET_Y,
+					y: 15 + GAME_HEIGHT + NAMEPLATE_OFFSET_Y,
 					width: GAME_WIDTH,
 				},
 			};
@@ -59,13 +59,13 @@ const ThreePlayer = () => {
 			const bottomY = 15 + GAME_HEIGHT + 80 + GAP; // 上段 + nameplate高さ + ギャップ
 			return {
 				game: {
-					x: GAME_OFFSET_X + GAME_WIDTH + GAP,
+					x: GAME_OFFSET_X,
 					y: bottomY,
 					width: GAME_WIDTH,
 					height: GAME_HEIGHT,
 				},
 				nameplate: {
-					x: GAME_OFFSET_X + GAME_WIDTH + GAP,
+					x: GAME_OFFSET_X,
 					y: bottomY + GAME_HEIGHT + NAMEPLATE_OFFSET_Y,
 					width: GAME_WIDTH,
 				},
@@ -118,30 +118,32 @@ const ThreePlayer = () => {
 				h={400}
 			/>
 			<InfoBox
-				x={GAME_OFFSET_X}
-				y={15}
-				w={GAME_WIDTH}
-				h={GAME_HEIGHT + 70}
-			>
-				<Category
-					fontSize={96}
-					x={5}
-					y={100}
-				>
-					{currentRun?.title}
-				</Category>
-				<Timer
-					x={140}
-					y={250}
-				/>
-			</InfoBox>
-			<InfoBox
 				x={10}
 				y={160}
 				w={420}
 				h={835}
+			>
+				<Category
+					fontSize={72}
+					x={5}
+					y={580}
+				>
+					{currentRun?.title}
+				</Category>
+			</InfoBox>
+			<Timer
+				x={35}
+				y={825}
+				fontSize={96}
 			/>
-			<Footer>RTA新人大会 - 新人の部 No Starworld</Footer>
+			<RunnerMessages
+				x={GAME_OFFSET_X + GAME_WIDTH + GAP}
+				y={GAME_HEIGHT + GAP + 95}
+				width={720}
+				height={475}
+				fontSize={42}
+			/>
+			<Footer>RTA新人大会 自称新人の部 - {currentRun?.title}</Footer>
 		</Overlay>
 	);
 };

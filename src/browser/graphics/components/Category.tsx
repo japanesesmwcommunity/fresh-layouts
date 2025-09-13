@@ -6,16 +6,18 @@ const CategoryContainer = styled.div<{
 	x?: number;
 	y?: number;
 }>`
-	font-family: "Luckiest Guy", system-ui;
-	-webkit-text-stroke: 1px white;
+	font-family: "M PLUS Rounded 1c", monospace;
+	-webkit-text-stroke: 3px white;
+	color: #ff801f;
+	font-weight: 900;
+	line-height: 84px;
 	position: absolute;
 	width: 100%;
 	text-align: center;
+	padding: 5px;
 	left: ${(props) => props.x}px;
 	top: ${(props) => props.y}px;
-
 	font-size: ${(props) => (props.fontSize ? props.fontSize : 128)}px;
-	font-weight: 1000;
 `;
 
 export const Category = (props: {

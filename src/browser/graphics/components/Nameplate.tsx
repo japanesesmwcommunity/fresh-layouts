@@ -5,7 +5,7 @@ import iconTwitch from "../image/icon/twitch.svg";
 
 // 定数をコンポーネント外で定義
 const NAMEPLATE_HEIGHT = 70;
-const SWITCH_INTERVAL = 30000;
+const SWITCH_INTERVAL = 20000;
 
 const Container = styled.div<{
 	x: number;
