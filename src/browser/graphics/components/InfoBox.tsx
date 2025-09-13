@@ -9,11 +9,8 @@ const InfoBoxContainer = styled.div<{
 }>`
 	background-color: rgb(20 20 20/80%);
 	border: 3px solid rgb(50 194 174);
-	color: #d99220;
 	box-sizing: border-box;
-	-webkit-text-stroke: 1px white;
 	font-size: 96px;
-	font-weight: 900;
 	position: absolute;
 	left: ${(props) => props.x}px;
 	top: ${(props) => props.y}px;

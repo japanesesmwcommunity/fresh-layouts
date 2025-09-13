@@ -47,7 +47,19 @@
 				"singleInstance": false
 			},
 			{
+				"file": "Setup.html",
+				"width": 1920,
+				"height": 1080,
+				"singleInstance": false
+			},
+			{
 				"file": "ThreePlayer.html",
+				"width": 1920,
+				"height": 1080,
+				"singleInstance": false
+			},
+			{
+				"file": "FourPlayer.html",
 				"width": 1920,
 				"height": 1080,
 				"singleInstance": false
