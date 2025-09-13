@@ -134,7 +134,7 @@ const ThreePlayer = () => {
 			<Timer
 				x={35}
 				y={825}
-				fontSize={96}
+				fontSize={90}
 			/>
 			<RunnerMessages
 				x={GAME_OFFSET_X + GAME_WIDTH + GAP}

@@ -39,6 +39,10 @@ const NameSection = styled.div<{isVisible: boolean}>`
 	gap: 8px;
 `;
 
+const TimeSection = styled.div`
+	color: rgb(255 208 54);
+`;
+
 const TwitchIcon = styled.img`
 	width: 40px;
 	height: 40px;
@@ -85,7 +89,9 @@ export const Nameplate = (props: {
 				)}
 				<span>{currentText}</span>
 			</NameSection>
-			{props.runner.finishTime && <span>{props.runner.finishTime}</span>}
+			<TimeSection>
+				{props.runner.finishTime && <span>{props.runner.finishTime}</span>}
+			</TimeSection>
 		</Container>
 	);
 };
