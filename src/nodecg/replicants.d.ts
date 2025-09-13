@@ -1,4 +1,6 @@
-import {Example} from "./generated/example";
+import {Runners} from "./generated/runners";
+import {Schedule} from "./generated/schedule";
+import {Timer} from "./generated/timer";
 
 type Assets = {
 	base: string;
@@ -12,7 +14,10 @@ type Assets = {
 
 type ReplicantMap = {
 	"assets:test": Assets[];
-	example: Example;
+	schedule: Schedule;
+	timer: Timer;
+	currentRun: Run;
+	runners: Runners;
 };
 
 export {ReplicantMap};

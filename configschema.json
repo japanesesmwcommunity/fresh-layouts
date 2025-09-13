@@ -4,5 +4,8 @@
 	"type": "object",
 	"additionalProperties": false,
 	"default": {},
-	"properties": {}
+	"properties": {
+		"googleApiKey": {"type": "string"},
+		"spreadsheetId": {"type": "string"}
+	}
 }

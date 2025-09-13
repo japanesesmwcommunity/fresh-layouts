@@ -6,7 +6,12 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export interface Configschema {
-	googleApiKey?: string;
-	spreadsheetId?: string;
+export type Runners = Runner[];
+
+export interface Runner {
+	id: number;
+	name: string;
+	twitchId?: string;
+	message?: string;
+	finishTime?: string;
 }

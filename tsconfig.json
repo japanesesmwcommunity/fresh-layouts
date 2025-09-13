@@ -22,9 +22,5 @@
 		"forceConsistentCasingInFileNames": true,
 		"isolatedModules": true
 	},
-	"include": [
-		"src/**/*.ts",
-		"src/**/*.tsx",
-		"node_modules/@nodecg/types/augment-window.d.ts"
-	]
+	"include": ["src/**/*.ts", "src/**/*.tsx"]
 }

@@ -1,6 +1,8 @@
 import {ServerNodecgInstance} from "../nodecg/nodecg";
-import {example} from "./example";
+import schedule from "./schedule";
+import timer from "./timer";
 
 export default (nodecg: ServerNodecgInstance) => {
-	example(nodecg);
+	schedule(nodecg);
+	timer(nodecg);
 };

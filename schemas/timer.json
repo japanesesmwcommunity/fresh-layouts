@@ -1,0 +1,16 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"raw": {"type": "integer", "default": 0},
+		"timeAtPaused": {"type": "integer", "default": 0},
+		"state": {
+			"enum": ["NotRunning", "Running", "Paused"],
+			"type": "string",
+			"default": "NotRunning"
+		},
+		"formattedTime": {"type": "string", "default": "0:00:00"}
+	},
+	"required": ["raw", "timeAtPaused", "state", "formattedTime"]
+}
