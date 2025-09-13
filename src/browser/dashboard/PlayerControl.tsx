@@ -32,7 +32,7 @@ export const PlayerControl = () => {
 							onClick={() =>
 								nodecg.sendMessage("current-run:player-confirm", r.id)
 							}
-							disabled={r.finishTime !== ""}
+							disabled={r.finishTime !== undefined && r.finishTime !== ""}
 						>
 							完走
 						</Button>
