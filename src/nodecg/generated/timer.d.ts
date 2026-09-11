@@ -9,6 +9,7 @@
 export interface Timer {
 	raw: number;
 	timeAtPaused: number;
+	startedAt: number | null;
 	state: 'NotRunning' | 'Running' | 'Paused';
 	formattedTime: string;
 }

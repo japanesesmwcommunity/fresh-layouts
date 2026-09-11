@@ -20,23 +20,28 @@ const formatTime = (ms: number | null | undefined) => {
 export default (nodecg: ServerNodecgInstance) => {
 	const timerRep = nodecg.Replicant("timer");
 
-	let startTime: Date | null = null;
 	let timerInterval: NodeJS.Timeout | null = null;
+
+	const updateTimer = () => {
+		if (!timerRep.value || timerRep.value.startedAt == null) return;
+		timerRep.value.raw =
+			Date.now() - timerRep.value.startedAt + timerRep.value.timeAtPaused;
+		timerRep.value.formattedTime = formatTime(timerRep.value.raw);
+	};
 
 	const startTimer = () => {
 		if (timerInterval || !timerRep.value) {
 			return;
 		}
-		startTime = new Date();
+		if (timerRep.value.state !== "Running") {
+			timerRep.value.startedAt = Date.now();
+		} else if (timerRep.value.startedAt == null) {
+			timerRep.value.startedAt =
+				Date.now() - timerRep.value.raw + timerRep.value.timeAtPaused;
+		}
 		timerRep.value.state = "Running";
-		timerInterval = setInterval(() => {
-			if (!timerRep.value) return;
-			timerRep.value.raw =
-				new Date().getTime() -
-				startTime!.getTime() +
-				timerRep.value.timeAtPaused;
-			timerRep.value.formattedTime = formatTime(timerRep.value.raw);
-		}, 500);
+		updateTimer();
+		timerInterval = setInterval(updateTimer, 500);
 		nodecg.log.info("timer start");
 	};
 
@@ -46,10 +51,12 @@ export default (nodecg: ServerNodecgInstance) => {
 		}
 
 		if (timerInterval) {
+			updateTimer();
 			clearInterval(timerInterval);
 			timerInterval = null;
 			timerRep.value.timeAtPaused = timerRep.value.raw;
 			timerRep.value.state = "Paused";
+			timerRep.value.startedAt = null;
 		}
 		nodecg.log.info("timer stop");
 	};
@@ -63,10 +70,15 @@ export default (nodecg: ServerNodecgInstance) => {
 		timerRep.value.raw = 0;
 		timerRep.value.formattedTime = formatTime(timerRep.value.raw);
 		timerRep.value.timeAtPaused = 0;
+		timerRep.value.startedAt = null;
 		timerRep.value.state = "NotRunning";
 		nodecg.log.info("timer reset");
 	};
 	nodecg.listenFor("timer:start", startTimer);
 	nodecg.listenFor("timer:stop", stopTimer);
 	nodecg.listenFor("timer:reset", resetTimer);
+
+	if (timerRep.value?.state === "Running") {
+		startTimer();
+	}
 };

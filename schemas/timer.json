@@ -5,6 +5,7 @@
 	"properties": {
 		"raw": {"type": "integer", "default": 0},
 		"timeAtPaused": {"type": "integer", "default": 0},
+		"startedAt": {"type": ["integer", "null"], "default": null},
 		"state": {
 			"enum": ["NotRunning", "Running", "Paused"],
 			"type": "string",
@@ -12,5 +13,5 @@
 		},
 		"formattedTime": {"type": "string", "default": "0:00:00"}
 	},
-	"required": ["raw", "timeAtPaused", "state", "formattedTime"]
+	"required": ["raw", "timeAtPaused", "startedAt", "state", "formattedTime"]
 }
