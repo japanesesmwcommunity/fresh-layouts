@@ -1,0 +1,22 @@
+# ホスト側の依存関係と生成物をイメージに持ち込まない
+node_modules
+/dashboard
+/extension
+/graphics
+/shared/dist
+**/*.tsbuildinfo
+
+# ローカルの設定・秘密情報・実行時データを除外する
+.env
+.env.*
+.npmrc
+.corepack.env
+/cfg
+/db
+/logs
+/assets
+
+# バージョン管理・開発ツールの内部データを除外する
+.git
+.claude
+.opencode
