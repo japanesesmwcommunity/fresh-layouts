@@ -1,5 +1,18 @@
 # Railwayへのデプロイ
 
+## 通常のデプロイ
+
+両環境ともCLIから明示的にデプロイする。productionのGitHubソース連携は解除済みで、コミット・pushによる自動デプロイは行わない。
+
+```sh
+pnpm deploy:dev
+pnpm deploy:prod
+```
+
+各コマンドはプロジェクト・環境・サービスを固定しており、`railway link` の現在の接続先には依存しない。Railway CLIでログインしてから実行する。アップロード対象はローカルの作業ツリーなので、本番へはコミット済みのコードをデプロイする。
+
+アプリのデプロイとIaC設定の反映は別操作。`.railway/railway.ts` を変更した場合は、対象環境にリンクして `railway config plan` → `railway config apply` を実行する。設定の適用に伴い再デプロイされる場合がある。
+
 ## developmentでの確認状況
 
 - Node 24へ移行済み。Railway上のNode v24.21.0でビルド・TypeScriptチェック・NodeCG起動・SQLiteの `quick_check`・Volumeリンク・ログインページのHTTP 200を確認済み。
@@ -26,7 +39,7 @@ Volumeの作成・初期化・設定アップロードはRailway側で一度行�
 
 ## 1. サービスとVolume
 
-Railwayにリポジトリを接続し、以下を設定する。
+RailwayにGitHubソース未接続のサービスを作成し、以下を設定する。
 
 | 設定 | 値 |
 | --- | --- |
@@ -35,14 +48,18 @@ Railwayにリポジトリを接続し、以下を設定する。
 | Volumeマウント先 | `/data` |
 | レプリカ数 | 1 |
 | Serverless | 無効 |
-| 自動デプロイ | 配信中の更新を避けるため無効を推奨 |
+| 自動デプロイ | GitHubソース未接続。CLIで明示的にデプロイ |
 | Variablesの `PORT` | `9090` |
 | 公開ドメインのtarget port | `9090` |
 | 通常運用のStart Command | 空欄（DockerfileのCMDを使う） |
 
 ボリュームは1つにまとめる。`/app` 全体にはマウントしない。
 
-`railway.json` は既存サービス向けのレガシー設定として残している。2026年の公式仕様では新規サービスに適用できず、既存サービスも2026-12-01で読み取り終了予定。新規サービスは上記をサービス設定またはRailway IaCで設定する。既存サービスのIaC移行は `railway config migrate` で確認する。
+Railway設定は `.railway/railway.ts` で管理する。2026-09-12にdevelopment・productionをIaCへ移行し、両環境のRailway Config File設定を解除して旧 `railway.json` を削除した。環境名に応じてdevelopmentの `fresh-layouts-dev` とproductionの `fresh-layouts` を定義し、既存の環境変数は `preserve()` で保持する。developmentの `/data` ボリュームもIaCに含む。
+
+設定変更は対象環境に `railway link` してから `railway config plan` で確認し、`railway config apply` で反映する。TSファイルの変更だけではRailwayへ反映されない。
+
+CLI 5.52.1の `railway config migrate` はDockerfile指定をコメントにし、スリープ・再起動設定を出力しないため、移行時は `railway config pull` の結果にDockerfile設定を補った。スリープ無効 (`sleepApplication: false`) と再起動ポリシー `ON_FAILURE` は両環境のAPIで確認済み。これらの既定値をTSに明示するとCLIが読み込み時に省略して毎回差分になるため、TSでは省略している。
 
 ## 2. 初回のVolume準備
 

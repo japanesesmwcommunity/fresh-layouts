@@ -21,9 +21,6 @@ COPY . /app/
 # Build the bundle
 RUN pnpm run build
 
-# Generate schema types
-RUN pnpm run generate-schema-types
-
 # cfg/nodecg.jsonとRailwayのtarget portも9090に揃える
 ENV PORT=9090
 EXPOSE 9090

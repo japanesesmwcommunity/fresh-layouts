@@ -3,6 +3,7 @@ node_modules
 /extension
 /graphics
 types/schemas
+/src/nodecg/generated/
 
 /assets
 /cfg
