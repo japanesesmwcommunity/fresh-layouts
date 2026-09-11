@@ -2,6 +2,7 @@
 
 ## developmentでの確認状況
 
+- NodeCG・`@nodecg/types` を2.8.0に更新済み。TypeScriptチェック、Railwayビルド、Extension読み込み、ログインページのHTTP 200を確認済み。更新後の動作はユーザーが問題なしと確認済み。
 - Railway上でのコンテナビルド・非rootでのNodeCG直接起動を確認済み。
 - Discordロールによるログインをユーザーが確認済み。
 - 再デプロイ後の永続化をユーザーが確認済み。
