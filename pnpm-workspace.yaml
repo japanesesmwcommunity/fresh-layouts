@@ -1,0 +1,9 @@
+allowBuilds:
+  '@vaadin/vaadin-usage-statistics': true
+  better-sqlite3: true
+  esbuild: true
+
+# Express 4 の ~6.15.1 制約では修正版に届かないため、通信入力の解析に使う qs を固定する。
+# GHSA-4mjr-xmp4-gh2g。Express 側の依存制約が修正版を許可したら削除する。
+overrides:
+  'express@4>qs': 6.16.0

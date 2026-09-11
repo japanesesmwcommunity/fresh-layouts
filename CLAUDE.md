@@ -31,20 +31,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 # 開発環境を開始（TypeScriptコンパイラ、Vite、NodeCGを実行）
-npm run dev
+pnpm dev
 
 # JSONスキーマからTypeScript型を生成
-npm run generate-schema-types
+pnpm generate-schema-types
 
 # プロダクション用ビルド
-npm run build
+pnpm build
 ```
 
 ## 開発フロー
 
 1. **新しいレプリカントの追加**:
    - `schemas/`ディレクトリにJSONスキーマを作成
-   - `npm run generate-schema-types`を実行してTypeScript定義を生成
+   - `pnpm generate-schema-types`を実行してTypeScript定義を生成
    - `src/nodecg/replicants.d.ts`の`ReplicantMap`に追加
 
 2. **新しいメッセージの追加**:
@@ -103,4 +103,4 @@ npm run build
 ## ルール
 
 - 日本語で応答すること。　コードのコメントは日本語を使う。 CLAUDE.mdへの記述、ユーザーへの応答は日本語で行う。
-- npm run dev, npm run buildは実行しない
+- pnpm dev, pnpm buildは実行しない
