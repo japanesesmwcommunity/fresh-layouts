@@ -2,6 +2,7 @@
 
 ## developmentでの確認状況
 
+- Node 24へ移行済み。Railway上のNode v24.21.0でビルド・TypeScriptチェック・NodeCG起動・SQLiteの `quick_check`・Volumeリンク・ログインページのHTTP 200を確認済み。
 - NodeCG・`@nodecg/types` を2.8.0に更新済み。TypeScriptチェック、Railwayビルド、Extension読み込み、ログインページのHTTP 200を確認済み。更新後の動作はユーザーが問題なしと確認済み。
 - Railway上でのコンテナビルド・非rootでのNodeCG直接起動を確認済み。
 - Discordロールによるログインをユーザーが確認済み。
@@ -11,6 +12,8 @@
 - バックアップの設定・復元テストは未実施。
 
 この構成は `entrypoint.sh` を使用しない。NodeCGをUID/GID 1001で直接起動し、永続Volume上の設定JSONをそのまま読む。
+
+Node.jsは24 LTSを使用する。Dockerは `node:24-alpine`、ローカルのバージョン指定は `.nvmrc` と `package.json` の `engines.node` に揃える。Windowsのnvmでは `nvm install 24` と `nvm use 24` で切り替える。
 
 ```text
 /app/cfg  -> /data/cfg

@@ -1,5 +1,5 @@
 # Railway上で永続Volumeの設定を直接読むNodeCGバンドル
-FROM node:22-alpine
+FROM node:24-alpine
 
 # Install dependencies for building native modules
 RUN apk add --no-cache python3 make g++ git
