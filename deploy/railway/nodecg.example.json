@@ -1,0 +1,28 @@
+{
+	"host": "0.0.0.0",
+	"port": 9090,
+	"baseURL": "REPLACE_WITH_PUBLIC_HOST",
+	"login": {
+		"enabled": true,
+		"sessionSecret": "REPLACE_WITH_RANDOM_SESSION_SECRET",
+		"forceHttpsReturn": true,
+		"discord": {
+			"enabled": true,
+			"clientID": "REPLACE_WITH_DISCORD_CLIENT_ID",
+			"clientSecret": "REPLACE_WITH_DISCORD_CLIENT_SECRET",
+			"scope": "identify",
+			"allowedUserIDs": ["REPLACE_WITH_DISCORD_USER_ID"]
+		}
+	},
+	"logging": {
+		"console": {
+			"enabled": true,
+			"level": "info"
+		},
+		"file": {
+			"enabled": true,
+			"level": "info",
+			"path": "/data/logs/nodecg.log"
+		}
+	}
+}

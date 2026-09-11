@@ -1,30 +1,39 @@
-# NodeCG Bundle Dockerfile for Cloud Run
+# Railway上で永続Volumeの設定を直接読むNodeCGバンドル
 FROM node:22-alpine
 
 # Install dependencies for building native modules
 RUN apk add --no-cache python3 make g++ git
 
+# pnpm を有効化
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+RUN corepack enable && corepack prepare pnpm@12.4.0 --activate
+
 # Set working directory
 WORKDIR /app
+
+# Install bundle dependencies (レイヤーキャッシュ用に先にマニフェストのみコピー)
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml /app/
+RUN pnpm install --frozen-lockfile
 
 # Copy bundle source code
 COPY . /app/
 
-# Install bundle dependencies
-RUN npm install
-
 # Build the bundle
-RUN npm run build
+RUN pnpm run build
 
 # Generate schema types
-RUN npm run generate-schema-types
+RUN pnpm run generate-schema-types
 
-# Copy entrypoint script
-COPY entrypoint.sh /app/
-RUN chmod +x /app/entrypoint.sh
+# cfg/nodecg.jsonとRailwayのtarget portも9090に揃える
+ENV PORT=9090
+EXPOSE 9090
 
-# Expose port (Cloud Run uses PORT env var, default 8080)
-EXPOSE 8080
+# /dataは起動時にRailway Volumeがマウントされる。
+# 実ディレクトリと設定ファイルはVolume上に一度だけ準備する。
+RUN ln -s /data/cfg /app/cfg && \
+    ln -s /data/db /app/db && \
+    ln -s /data/logs /app/logs && \
+    ln -s /data/assets /app/assets
 
 # Create non-root user for security
 RUN addgroup -g 1001 -S nodecg && \
@@ -33,5 +42,5 @@ RUN addgroup -g 1001 -S nodecg && \
 
 USER nodecg
 
-# Start with entrypoint script
-CMD ["/app/entrypoint.sh"]
+# 設定の生成・上書きやパッケージマネージャーの起動を行わない
+CMD ["node", "/app/node_modules/nodecg/index.js"]
