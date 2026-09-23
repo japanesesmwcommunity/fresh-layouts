@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import "@fontsource/fira-code/700.css";
+import "@fontsource-variable/google-sans-flex/wght.css";
 import {useReplicant} from "../../use-replicant";
 
 const TimerContainer = styled.div<{
@@ -9,25 +9,27 @@ const TimerContainer = styled.div<{
 	y?: number;
 	width?: number;
 }>`
-	font-family: "Fira Code", monospace;
+	font-family: "Google Sans Flex Variable", sans-serif;
+	font-weight: 900;
+	font-variant-numeric: tabular-nums;
 	color: ${(props) => props.textColor};
-	text-shadow: 
-		-1px -1px 0 white,
-		0px -1px 0 white,
-		1px -1px 0 white,
-		-1px 0px 0 white,
-		1px 0px 0 white,
-		-1px 1px 0 white,
-		0px 1px 0 white,
-		1px 1px 0 white,
-		-2px -2px 0 white,
-		0px -2px 0 white,
-		2px -2px 0 white,
-		-2px 0px 0 white,
-		2px 0px 0 white,
-		-2px 2px 0 white,
-		0px 2px 0 white,
-		2px 2px 0 white;
+	// text-shadow: 
+	// 	-1px -1px 0 white,
+	// 	0px -1px 0 white,
+	// 	1px -1px 0 white,
+	// 	-1px 0px 0 white,
+	// 	1px 0px 0 white,
+	// 	-1px 1px 0 white,
+	// 	0px 1px 0 white,
+	// 	1px 1px 0 white,
+	// 	-2px -2px 0 white,
+	// 	0px -2px 0 white,
+	// 	2px -2px 0 white,
+	// 	-2px 0px 0 white,
+	// 	2px 0px 0 white,
+	// 	-2px 2px 0 white,
+	// 	0px 2px 0 white,
+	// 	2px 2px 0 white;
 	position: absolute;
 	left: ${(props) => props.x}px;
 	top: ${(props) => props.y}px;
