@@ -1,14 +1,9 @@
-import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
+import {CssBaseline, ThemeProvider} from "@mui/material";
 import {render} from "../../render";
 import {Column, Container, Grid} from "../components/Dashboard";
 import {PlayerControl} from "../PlayerControl";
+import {theme} from "../theme";
 import {ControlTimer} from "../Timer";
-
-const theme = createTheme({
-	palette: {
-		mode: "light",
-	},
-});
 
 export const Run = () => {
 	return (

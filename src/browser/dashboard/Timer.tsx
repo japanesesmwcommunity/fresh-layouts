@@ -20,6 +20,7 @@ const Timer = styled.div<{color: string}>`
 	padding: 0 16px;
 	font-size: 48px;
 	font-weight: 700;
+	font-variant-numeric: tabular-nums;
 	border-radius: 16px;
 	color: ${(props) => props.color};
 `;
