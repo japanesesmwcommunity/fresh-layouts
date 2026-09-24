@@ -1,34 +1,30 @@
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import {render} from "../../render";
-import {Column, Grid} from "../components/Dashboard";
+import {Column, Container, Grid} from "../components/Dashboard";
 import {Runners} from "../Runners";
 import {Schedule} from "../Schedule";
 import {Spreadsheet} from "../Spreadsheet";
 import {theme} from "../theme";
 
-const App = () => {
-	return (
-		<>
-			<ThemeProvider theme={theme}>
-				<CssBaseline />
-				<Grid>
-					<Column>
-						<Runners />
-					</Column>
-					<Column>
-						<Schedule />
-					</Column>
-					<Column>
-						<Spreadsheet />
-					</Column>
-				</Grid>
-			</ThemeProvider>
-		</>
-	);
-};
+const Info = () => (
+	<Container>
+		<Grid>
+			<Column>
+				<Schedule />
+			</Column>
+			<Column>
+				<Runners />
+			</Column>
+			<Column>
+				<Spreadsheet />
+			</Column>
+		</Grid>
+	</Container>
+);
 
 render(
-	<>
-		<App />
-	</>,
+	<ThemeProvider theme={theme}>
+		<CssBaseline />
+		<Info />
+	</ThemeProvider>,
 );

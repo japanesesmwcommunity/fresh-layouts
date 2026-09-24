@@ -5,7 +5,7 @@ import {useReplicant} from "../use-replicant";
 
 const Container = styled.div`
 	display: grid;
-	grid-template-columns: 1fr auto;
+	grid-template-columns: minmax(0, 1fr);
 	grid-template-rows: 72px 1fr;
 	grid-template-areas:
 		"timer"
@@ -18,7 +18,7 @@ const Container = styled.div`
 const Timer = styled.div<{color: string}>`
 	grid-area: timer;
 	padding: 0 16px;
-	font-size: 48px;
+	font-size: clamp(32px, 4vw, 48px);
 	font-weight: 700;
 	font-variant-numeric: tabular-nums;
 	border-radius: 16px;
@@ -29,7 +29,8 @@ const ButtonContainer = styled.div`
 	display: grid;
 	grid-area: ctrls;
 	justify-items: center;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	width: 100%;
 	gap: 0 8px;
 `;
 

@@ -28,7 +28,9 @@ export const Spreadsheet = () => {
 	return (
 		<Stack spacing={2}>
 			<Typography variant='h6'>スプレッドシート取得</Typography>
-			<Alert severity='info'>取得すると走者一覧を置き換えます。</Alert>
+			<Alert severity='info'>
+				取得すると走者一覧を置き換えます。
+			</Alert>
 			{notice && <Alert severity={notice.severity}>{notice.text}</Alert>}
 			<Button
 				variant='contained'

@@ -41,7 +41,9 @@ export const Runners = () => {
 			<Typography variant='h6'>走者情報</Typography>
 			{saved && <Alert severity='success'>走者情報を保存しました。</Alert>}
 			{!runners?.length && (
-				<Typography color='text.secondary'>走者情報がありません。</Typography>
+				<Typography color='text.secondary'>
+					走者情報がありません。
+				</Typography>
 			)}
 			<List
 				disablePadding

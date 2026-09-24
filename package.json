@@ -32,14 +32,14 @@
 		"dashboardPanels": [
 			{
 				"name": "run",
-				"title": "進行中",
+				"title": "0-配信管理",
 				"fullbleed": true,
 				"file": "Run.html",
 				"headerColor": "#525F78"
 			},
 			{
 				"name": "info",
-				"title": "情報管理",
+				"title": "1-情報管理",
 				"fullbleed": true,
 				"file": "Info.html",
 				"headerColor": "#525F78"

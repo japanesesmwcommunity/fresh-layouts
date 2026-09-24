@@ -19,10 +19,10 @@ export type MessageMap = {
 	"timer:reset": unknown;
 	"runners:get": {result: number; error: string};
 	"runners:update": {data: Runner; error: string};
-	"schedule:add": {data: Run};
-	"schedule:update": {data: {index: number; run: Run}};
-	"schedule:remove": {data: number};
-	"current-run:set": {data: number};
+	"schedule:add": {data: Run; error: string};
+	"schedule:update": {data: Run; error: string};
+	"schedule:remove": {data: number; error: string};
+	"current-run:set": {data: number; error: string};
 	"current-run:player-confirm": {data: number};
 	"current-run:player-undo": {data: number};
 };

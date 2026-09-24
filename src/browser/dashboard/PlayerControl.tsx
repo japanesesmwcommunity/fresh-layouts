@@ -1,53 +1,55 @@
-import styled from "@emotion/styled";
-import {Button, Typography} from "@mui/material";
-import {Runner} from "../../nodecg/generated/currentRun";
+import {Box, Button, Stack, Typography} from "@mui/material";
 import {useReplicant} from "../use-replicant";
-
-const RunnerContainer = styled.div`
-	display: flex;
-	justify-items: center;
-	grid-template-columns: 1fr 1fr 1fr;
-	justify-content: space-between;
-	margin: 8px;
-`;
-
-const ButtonContainer = styled.div`
-	display: flex;
-	justify-items: center;
-	grid-template-columns: 1fr 1fr 1fr;
-	gap: 0 8px;
-`;
 
 export const PlayerControl = () => {
 	const currentRun = useReplicant("currentRun");
 	return (
-		<>
-			{currentRun?.runners.map((r: Runner) => (
-				<RunnerContainer>
-					<Typography variant='h6'>{r.name}</Typography>
-					<ButtonContainer>
-						<Typography variant='h6'>{r.finishTime}</Typography>
+		<Stack spacing={2}>
+			{currentRun?.runners.map((runner) => (
+				<Box
+					key={runner.id}
+					sx={{borderTop: "1px solid", borderColor: "divider", pt: 2}}
+				>
+					<Stack
+						direction='row'
+						justifyContent='space-between'
+						spacing={1}
+						sx={{mb: 1}}
+					>
+						<Typography sx={{overflowWrap: "anywhere"}}>
+							{runner.name}
+						</Typography>
+						<Typography
+							sx={{fontVariantNumeric: "tabular-nums", whiteSpace: "nowrap"}}
+						>
+							{runner.finishTime || "未完走"}
+						</Typography>
+					</Stack>
+					<Stack
+						direction='row'
+						spacing={1}
+					>
 						<Button
 							variant='contained'
 							onClick={() =>
-								nodecg.sendMessage("current-run:player-confirm", r.id)
+								nodecg.sendMessage("current-run:player-confirm", runner.id)
 							}
-							disabled={r.finishTime !== undefined && r.finishTime !== ""}
+							disabled={!!runner.finishTime}
 						>
 							完走
 						</Button>
 						<Button
-							variant='contained'
+							variant='outlined'
 							onClick={() =>
-								nodecg.sendMessage("current-run:player-undo", r.id)
+								nodecg.sendMessage("current-run:player-undo", runner.id)
 							}
-							disabled={!r.finishTime}
+							disabled={!runner.finishTime}
 						>
-							キャンセル
+							取り消し
 						</Button>
-					</ButtonContainer>
-				</RunnerContainer>
+					</Stack>
+				</Box>
 			))}
-		</>
+		</Stack>
 	);
 };
