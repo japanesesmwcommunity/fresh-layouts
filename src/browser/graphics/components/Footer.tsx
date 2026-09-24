@@ -7,11 +7,11 @@ const Container = styled.div`
 	display: grid;
 	position: absolute;
 	width: 100%;
-	height: 70px;
+	height: 60px;
 	left: 0;
 	bottom: 0;
 	background-color: rgb(0 0 0/80%);
-	font-size: 40px;
+	font-size: 2.5rem;
 	grid-template-columns: 1fr 1fr;
 	grid-template-areas: "message clock";
 	align-items: center;

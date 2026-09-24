@@ -5,7 +5,7 @@ const ClockContainer = styled.div`
 	grid-area: clock;
 	justify-self: end;
 	color: white;
-	line-height: 70px;
+	line-height: 1;
 `;
 
 const formatTime = (date: Date): string => {

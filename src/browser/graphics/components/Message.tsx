@@ -5,7 +5,7 @@ const MessageContainer = styled.div`
 	grid-area: message;
 	justify-self: start;
 	color: white;
-	line-height: 70px;
+	line-height: 1;
 `;
 
 export const Message = (props: {children: ReactNode}) => {
