@@ -13,27 +13,16 @@ const TimerContainer = styled.div<{
 	font-weight: 900;
 	font-variant-numeric: tabular-nums;
 	color: ${(props) => props.textColor};
-	// text-shadow: 
-	// 	-1px -1px 0 white,
-	// 	0px -1px 0 white,
-	// 	1px -1px 0 white,
-	// 	-1px 0px 0 white,
-	// 	1px 0px 0 white,
-	// 	-1px 1px 0 white,
-	// 	0px 1px 0 white,
-	// 	1px 1px 0 white,
-	// 	-2px -2px 0 white,
-	// 	0px -2px 0 white,
-	// 	2px -2px 0 white,
-	// 	-2px 0px 0 white,
-	// 	2px 0px 0 white,
-	// 	-2px 2px 0 white,
-	// 	0px 2px 0 white,
-	// 	2px 2px 0 white;
-	position: absolute;
+	position: ${(props) =>
+		props.x !== undefined || props.y !== undefined ? "absolute" : "relative"};
 	left: ${(props) => props.x}px;
 	top: ${(props) => props.y}px;
-	width: ${(props) => props.width ?? 350}px;
+	width: ${(props) =>
+		props.width !== undefined
+			? `${props.width}px`
+			: props.x !== undefined || props.y !== undefined
+				? "350px"
+				: "100%"};
 	text-align: right;
 	transition:
 		text-shadow 0.3s ease,
@@ -41,7 +30,12 @@ const TimerContainer = styled.div<{
 	font-size: ${(props) => (props.fontSize ? props.fontSize : 128)}px;
 `;
 
-export const Timer = (props: {fontSize?: number; x?: number; y?: number; width?: number}) => {
+export const Timer = (props: {
+	fontSize?: number;
+	x?: number;
+	y?: number;
+	width?: number;
+}) => {
 	const timer = useReplicant("timer");
 
 	const color = (): string => {

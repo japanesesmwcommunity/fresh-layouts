@@ -3,13 +3,12 @@ import {useMemo} from "react";
 import {Runner} from "../../../nodecg/generated/currentRun";
 import {render} from "../../render";
 import {useReplicant} from "../../use-replicant";
-import {Category} from "../components/Category";
+import {CategoryAndTimer} from "../components/CategoryAndTimer";
 import {Footer} from "../components/Footer";
 import {InfoBox} from "../components/InfoBox";
 import {Logo} from "../components/Logo";
 import {NAMEPLATE_HEIGHT, Nameplate} from "../components/Nameplate";
 import {RunnerMessages} from "../components/RunnerMessages";
-import {Timer} from "../components/Timer";
 import {Box, calculateClipPath} from "../util/clipPath";
 import {Overlay} from "./OverlayTemplate";
 
@@ -24,7 +23,8 @@ const GAP = 20; // 各枠の間のギャップ
 
 const ThreePlayer = () => {
 	const getPlayerPosition = (playerIndex: number) => {
-		const x = playerIndex === 1 ? GAME_OFFSET_X + GAME_WIDTH + GAP : GAME_OFFSET_X;
+		const x =
+			playerIndex === 1 ? GAME_OFFSET_X + GAME_WIDTH + GAP : GAME_OFFSET_X;
 		const y = playerIndex === 2 ? LOWER_ROW_Y : 15;
 		return {
 			game: {x, y, width: GAME_WIDTH, height: GAME_HEIGHT},
@@ -72,28 +72,22 @@ const ThreePlayer = () => {
 			})}
 			<Logo
 				w={600}
-                h={120}
-                x={-45}
-                y={40}
+				h={120}
+				x={-45}
+				y={40}
 			/>
 			<InfoBox
 				x={10}
 				y={160}
 				w={420}
-				h={CONTENT_BOTTOM - 160}
-			>
-				<Category
-					fontSize={72}
-					x={5}
-					y={580}
-				>
-					{currentRun?.title}
-				</Category>
-			</InfoBox>
-			<Timer
-				x={35}
-				y={825}
-				fontSize={90}
+				h={515}
+			/>
+			<CategoryAndTimer
+				x={10}
+				y={695}
+				w={420}
+				h={CONTENT_BOTTOM - 695}
+				category={currentRun?.title}
 			/>
 			<RunnerMessages
 				x={GAME_OFFSET_X + GAME_WIDTH + GAP}
