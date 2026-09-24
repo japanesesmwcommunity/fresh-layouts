@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import "@fontsource-variable/google-sans-flex/wght.css";
 import {useEffect, useState} from "react";
 import {Runner} from "../../../nodecg/generated/currentRun";
 import iconTwitch from "../image/icon/twitch.svg";
@@ -42,6 +43,7 @@ const NameText = styled.span<{withIcon: boolean}>`
 `;
 
 const TimeSection = styled.div`
+	font-family: "Google Sans Flex Variable", sans-serif;
 	color: rgb(255 208 54);
 `;
 
