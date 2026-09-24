@@ -41,9 +41,7 @@ export const Runners = () => {
 			<Typography variant='h6'>走者情報</Typography>
 			{saved && <Alert severity='success'>走者情報を保存しました。</Alert>}
 			{!runners?.length && (
-				<Typography color='text.secondary'>
-					走者情報がありません。
-				</Typography>
+				<Typography color='text.secondary'>走者情報がありません。</Typography>
 			)}
 			<List
 				disablePadding
@@ -60,7 +58,7 @@ export const Runners = () => {
 					>
 						<ListItemText
 							primary={runner.name}
-							secondary={[runner.category, runner.twitchId]
+							secondary={[runner.category, runner.type, runner.twitchId]
 								.filter(Boolean)
 								.join(" ／ ")}
 						/>
@@ -99,6 +97,14 @@ export const Runners = () => {
 									disabled={busy}
 									onChange={(event) =>
 										setDraft({...draft, category: event.target.value})
+									}
+								/>
+								<TextField
+									label='type'
+									value={draft.type ?? ""}
+									disabled={busy}
+									onChange={(event) =>
+										setDraft({...draft, type: event.target.value})
 									}
 								/>
 								<TextField

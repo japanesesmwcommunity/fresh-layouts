@@ -12,6 +12,9 @@
 		"category": {
 			"type": "string"
 		},
+		"type": {
+			"type": "string"
+		},
 		"twitchId": {
 			"type": "string"
 		},

@@ -34,11 +34,42 @@ test("走者シートの4列を読み込み空行を除外する", () => {
 			id: 11,
 			name: "走者A",
 			category: "Any%",
+			type: "",
 			message: "よろしくお願いします",
 			twitchId: "runner_a",
 		},
-		{id: 12, name: "走者B", category: "", message: "", twitchId: ""},
+		{id: 12, name: "走者B", category: "", type: "", message: "", twitchId: ""},
 	]);
+});
+test("type列を見出しで読み込み列順の変更と空欄を扱う", () => {
+	const runners = parseRunnerRows(
+		[
+			["type", "twitch_id", "name", "message", "category"],
+			[" 新人 ", "runner_a", "走者A", "応援お願いします", "Any%"],
+			["", "runner_b", "走者B"],
+		],
+		0,
+	);
+	assert.deepEqual(runners[0], {
+		id: 1,
+		name: "走者A",
+		type: "新人",
+		twitchId: "runner_a",
+		message: "応援お願いします",
+		category: "Any%",
+	});
+	assert.equal(runners[1].type, "");
+	for (const duplicate of ["name", "type"]) {
+		assert.throws(() =>
+			parseRunnerRows(
+				[
+					["name", "category", "message", "twitch_id", "type", duplicate],
+					["走者A"],
+				],
+				0,
+			),
+		);
+	}
 });
 test("不正な見出し・空データ・走者名欠損を拒否する", () => {
 	assert.throws(() => parseRunnerRows([["name", "twitch_id", "message"]], 0));
@@ -58,6 +89,7 @@ test("不正な見出し・空データ・走者名欠損を拒否する", () =>
 	);
 	assert.throws(() => normalizeRunner({name: " ", category: "Any%"}));
 	assert.throws(() => normalizeRunner({name: "走者", twitchId: 123}));
+	assert.throws(() => normalizeRunner({name: "走者", type: 123}));
 });
 test("走者情報は編集可能なフィールドだけを返す", () => {
 	assert.deepEqual(
@@ -65,11 +97,18 @@ test("走者情報は編集可能なフィールドだけを返す", () => {
 			id: 8,
 			name: " 走者 ",
 			category: "Any% ",
+			type: " 新人 ",
 			message: " message ",
 			twitchId: " runner ",
 			finishTime: "9:00:00",
 		}),
-		{name: "走者", category: "Any%", message: " message ", twitchId: "runner"},
+		{
+			name: "走者",
+			category: "Any%",
+			type: "新人",
+			message: " message ",
+			twitchId: "runner",
+		},
 	);
 });
 test("TwitchタイトルとカテゴリーIDの境界を検証する", () => {

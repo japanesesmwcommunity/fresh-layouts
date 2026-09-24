@@ -5,6 +5,7 @@
 	"properties": {
 		"id": {"type": "number"},
 		"title": {"type": "string"},
+		"type": {"type": "string"},
 		"runners": {
 			"type": "array",
 			"items": {

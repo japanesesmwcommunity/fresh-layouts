@@ -21,6 +21,15 @@ export default (nodecg: ServerNodecgInstance) => {
 			throw new Error("開催日時を入力してください。");
 		if (!Array.isArray(input.runners))
 			throw new Error("走者の指定が不正です。");
+		if (input.type !== undefined && typeof input.type !== "string")
+			throw new Error("typeの指定が不正です。");
+		const type = input.type?.trim() ?? "";
+		if (
+			type &&
+			type !== existing?.type &&
+			!runnersRep.value?.some((runner) => runner.type?.trim() === type)
+		)
+			throw new Error("typeを一覧から選び直してください。");
 		const ids = new Set<number>();
 		const runners = input.runners.map((runner) => {
 			const found =
@@ -34,6 +43,7 @@ export default (nodecg: ServerNodecgInstance) => {
 		return {
 			id: input.id,
 			title: input.title.trim(),
+			type,
 			timestamp: new Date(input.timestamp).toISOString(),
 			runners,
 		};

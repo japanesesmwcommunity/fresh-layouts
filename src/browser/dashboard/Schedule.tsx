@@ -10,6 +10,7 @@ import {
 	List,
 	ListItemButton,
 	ListItemText,
+	MenuItem,
 	Stack,
 	TextField,
 	Typography,
@@ -56,7 +57,7 @@ export const Schedule = () => {
 		setDraft(
 			run
 				? {...run, timestamp: toLocalDateTime(run.timestamp)}
-				: {id: 0, title: "", timestamp: "", runners: []},
+				: {id: 0, title: "", type: "", timestamp: "", runners: []},
 		);
 		setError("");
 		setSaved("");
@@ -95,9 +96,21 @@ export const Schedule = () => {
 		}
 	};
 	const choices = [...(runners ?? [])];
+	const types = [
+		...new Set(
+			(runners ?? [])
+				.map((runner) => runner.type?.trim() ?? "")
+				.filter(Boolean),
+		),
+	].sort((a, b) => a.localeCompare(b, "ja"));
+	if (draft?.type && !types.includes(draft.type)) types.push(draft.type);
 	for (const runner of draft?.runners ?? []) {
 		if (!choices.some((item) => item.id === runner.id)) choices.push(runner);
 	}
+	const selectedType = draft?.type?.trim();
+	const runnerChoices = selectedType
+		? choices.filter((runner) => runner.type?.trim() === selectedType)
+		: choices;
 	return (
 		<Stack spacing={2}>
 			<Typography variant='h6'>スケジュール編集</Typography>
@@ -126,6 +139,7 @@ export const Schedule = () => {
 							primary={run.title}
 							secondary={
 								formatScheduleTime(run.timestamp) +
+								(run.type ? " ／ " + run.type : "") +
 								" ／ " +
 								run.runners.map((runner) => runner.name).join("、")
 							}
@@ -183,9 +197,33 @@ export const Schedule = () => {
 									disabled={busy}
 									required
 								/>
+								<TextField
+									select
+									label='type'
+									value={draft.type ?? ""}
+									onChange={(event) =>
+										setDraft({...draft, type: event.target.value})
+									}
+									disabled={busy}
+									slotProps={{
+										inputLabel: {shrink: true},
+										select: {displayEmpty: true},
+									}}
+								>
+									<MenuItem value=''>未指定</MenuItem>
+									{types.map((type) => (
+										<MenuItem
+											key={type}
+											value={type}
+										>
+											{type}
+										</MenuItem>
+									))}
+								</TextField>
 								<Autocomplete
 									multiple
-									options={choices}
+									options={runnerChoices}
+									noOptionsText='該当する走者がいません'
 									value={draft.runners}
 									getOptionLabel={(runner) =>
 										runner.name +
