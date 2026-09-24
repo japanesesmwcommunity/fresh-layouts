@@ -174,7 +174,7 @@ const App = () => {
 					height={850}
 					fontSize={56}
 				/>
-				<Footer>RTA新人大会 自称新人の部</Footer>
+				<Footer>RTA新人大会 {currentRun?.type}</Footer>
 			</Overlay>
 		</>
 	);
