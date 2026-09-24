@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import {useEffect, useState} from "react";
 import {useReplicant} from "../../use-replicant";
+import {OUTLINE_COLOR} from "../colors";
 
 // 定数をコンポーネント外で定義
 const SWITCH_INTERVAL = 20000;
@@ -20,7 +21,7 @@ const MessagesContainer = styled.div<{
 	background-color: rgba(0, 0, 0, 0.8);
 	color: white;
 	padding: 16px 20px;
-	border: 3px solid #fff;
+	border: 3px solid ${OUTLINE_COLOR};
 	font-size: ${(props) => props.fontSize ?? 24}px;
 	line-height: 1.4;
 	height: ${(props) => props.height ?? 100}px;

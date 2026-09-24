@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import {ReactNode} from "react";
+import {OUTLINE_COLOR} from "../colors";
 
 const InfoBoxContainer = styled.div<{
 	x: number;
@@ -8,7 +9,7 @@ const InfoBoxContainer = styled.div<{
 	h: number;
 }>`
 	background-color: rgb(20 20 20/80%);
-	border: 3px solid rgb(50 194 174);
+	border: 3px solid ${OUTLINE_COLOR};
 	box-sizing: border-box;
 	font-size: 96px;
 	position: absolute;
