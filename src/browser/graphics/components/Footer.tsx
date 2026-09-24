@@ -10,7 +10,7 @@ const Container = styled.div`
 	height: 60px;
 	left: 0;
 	bottom: 0;
-	background-color: rgb(0 0 0/80%);
+	background-color: #202020;
 	font-size: 2.5rem;
 	grid-template-columns: 1fr 1fr;
 	grid-template-areas: "message clock";
