@@ -15,6 +15,8 @@ type Assets = {
 
 type ReplicantMap = {
 	"assets:test": Assets[];
+	"assets:bg": Assets[];
+	"assets:logo": Assets[];
 	schedule: Schedule;
 	timer: Timer;
 	currentRun: CurrentRun;

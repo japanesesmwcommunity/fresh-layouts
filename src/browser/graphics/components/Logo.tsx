@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import {useReplicant} from "../../use-replicant";
 import LogoImage from "../image/logo.png";
 
 const LogoContainer = styled.div<{
@@ -18,6 +19,19 @@ const LogoContainer = styled.div<{
 	top: ${(props) => props.y || 20}px;
 `;
 
-export const Logo = (props: {w?: number; h?: number; x?: number; y?: number}) => {
-	return <LogoContainer src={LogoImage} {...props}></LogoContainer>;
+export const Logo = (props: {
+	w?: number;
+	h?: number;
+	x?: number;
+	y?: number;
+}) => {
+	const assets = useReplicant("assets:logo");
+	const asset = assets?.[0];
+	const src = asset ? `${asset.url}?v=${asset.sum}` : LogoImage;
+	return (
+		<LogoContainer
+			src={src}
+			{...props}
+		></LogoContainer>
+	);
 };

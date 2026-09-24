@@ -27,6 +27,28 @@
 					"gif",
 					"png"
 				]
+			},
+			{
+				"name": "bg",
+				"title": "背景",
+				"allowedTypes": [
+					"png",
+					"jpg",
+					"jpeg",
+					"gif",
+					"webp"
+				]
+			},
+			{
+				"name": "logo",
+				"title": "ロゴ",
+				"allowedTypes": [
+					"png",
+					"jpg",
+					"jpeg",
+					"gif",
+					"webp"
+				]
 			}
 		],
 		"dashboardPanels": [

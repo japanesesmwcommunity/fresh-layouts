@@ -4,6 +4,7 @@ import "@fontsource/m-plus-rounded-1c/700.css";
 import "@fontsource/m-plus-rounded-1c/800.css";
 import "@fontsource/m-plus-rounded-1c/900.css";
 import {ReactNode} from "react";
+import {useReplicant} from "../../use-replicant";
 import overlayImage from "../image/fresh-layout.png";
 
 const Container = styled.div<{bgImg: string; clipPath: string}>`
@@ -17,9 +18,12 @@ const Container = styled.div<{bgImg: string; clipPath: string}>`
 `;
 
 export const Overlay = (props?: {clipPath?: string; children?: ReactNode}) => {
+	const assets = useReplicant("assets:bg");
+	const asset = assets?.[0];
+	const bgImg = asset ? `${asset.url}?v=${asset.sum}` : overlayImage;
 	return (
 		<Container
-			bgImg={overlayImage}
+			bgImg={bgImg}
 			clipPath={props?.clipPath || ""}
 		>
 			{props?.children}
