@@ -96,7 +96,7 @@ const ThreePlayer = () => {
 				height={GAME_HEIGHT + NAMEPLATE_HEIGHT}
 				fontSize={42}
 			/>
-			<Footer>RTA新人大会 自称新人の部 - {currentRun?.title}</Footer>
+			<Footer>RTA新人大会 自称新人の部</Footer>
 		</Overlay>
 	);
 };

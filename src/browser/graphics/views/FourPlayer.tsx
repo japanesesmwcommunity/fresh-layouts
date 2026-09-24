@@ -105,7 +105,7 @@ const FourPlayer = () => {
 				h={240}
 				category={currentRun?.title}
 			/>
-			<Footer>RTA新人大会 自称新人の部 - {currentRun?.title}</Footer>
+			<Footer>RTA新人大会 自称新人の部</Footer>
 		</Overlay>
 	);
 };
