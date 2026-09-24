@@ -7,7 +7,7 @@ import {Category} from "../components/Category";
 import {Footer} from "../components/Footer";
 import {InfoBox} from "../components/InfoBox";
 import {Logo} from "../components/Logo";
-import {Nameplate} from "../components/Nameplate";
+import {NAMEPLATE_HEIGHT, Nameplate} from "../components/Nameplate";
 import {RunnerMessages} from "../components/RunnerMessages";
 import {Timer} from "../components/Timer";
 import {Box, calculateClipPath} from "../util/clipPath";
@@ -16,6 +16,8 @@ import {Overlay} from "./OverlayTemplate";
 // 定数をコンポーネント外で定義
 const GAME_WIDTH = 720; // 3枠逆L字レイアウトでの個別ゲーム画面の幅
 const GAME_HEIGHT = (GAME_WIDTH / 16) * 9;
+const CONTENT_BOTTOM = 995;
+const LOWER_ROW_Y = CONTENT_BOTTOM - GAME_HEIGHT - NAMEPLATE_HEIGHT;
 const GAME_OFFSET_X = 445;
 const NAMEPLATE_OFFSET_Y = 0; // ゲーム画面からのオフセット
 const GAP = 20; // 各枠の間のギャップ
@@ -23,7 +25,7 @@ const GAP = 20; // 各枠の間のギャップ
 const ThreePlayer = () => {
 	const getPlayerPosition = (playerIndex: number) => {
 		const x = playerIndex === 1 ? GAME_OFFSET_X + GAME_WIDTH + GAP : GAME_OFFSET_X;
-		const y = playerIndex === 2 ? 15 + GAME_HEIGHT + 80 + GAP : 15;
+		const y = playerIndex === 2 ? LOWER_ROW_Y : 15;
 		return {
 			game: {x, y, width: GAME_WIDTH, height: GAME_HEIGHT},
 			nameplate: {
@@ -78,7 +80,7 @@ const ThreePlayer = () => {
 				x={10}
 				y={160}
 				w={420}
-				h={835}
+				h={CONTENT_BOTTOM - 160}
 			>
 				<Category
 					fontSize={72}
@@ -95,9 +97,9 @@ const ThreePlayer = () => {
 			/>
 			<RunnerMessages
 				x={GAME_OFFSET_X + GAME_WIDTH + GAP}
-				y={GAME_HEIGHT + GAP + 95}
+				y={LOWER_ROW_Y}
 				width={720}
-				height={475}
+				height={GAME_HEIGHT + NAMEPLATE_HEIGHT}
 				fontSize={42}
 			/>
 			<Footer>RTA新人大会 自称新人の部 - {currentRun?.title}</Footer>

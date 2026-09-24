@@ -7,7 +7,7 @@ import {Category} from "../components/Category";
 import {Footer} from "../components/Footer";
 import {InfoBox} from "../components/InfoBox";
 import {Logo} from "../components/Logo";
-import {Nameplate} from "../components/Nameplate";
+import {NAMEPLATE_HEIGHT, Nameplate} from "../components/Nameplate";
 import {Timer} from "../components/Timer";
 import {Box, calculateClipPath} from "../util/clipPath";
 import {Overlay} from "./OverlayTemplate";
@@ -15,6 +15,8 @@ import {Overlay} from "./OverlayTemplate";
 // 定数をコンポーネント外で定義
 const GAME_WIDTH = 720; // 2x2レイアウトでの個別ゲーム画面の幅
 const GAME_HEIGHT = (GAME_WIDTH / 16) * 9;
+const CONTENT_BOTTOM = 995;
+const LOWER_ROW_Y = CONTENT_BOTTOM - GAME_HEIGHT - NAMEPLATE_HEIGHT;
 const NAMEPLATE_OFFSET_Y = 0; // ゲーム画面からのオフセット
 const GAP = 20; // 各枠の間のギャップ
 
@@ -25,7 +27,7 @@ const FourPlayer = () => {
 		const col = playerIndex % 2; // 0: 左, 1: 右
 
 		const baseX = 445 + col * (GAME_WIDTH + GAP);
-		const baseY = 15 + row * (GAME_HEIGHT + GAP + 80); // Nameplateの高さ分も考慮
+		const baseY = row === 0 ? 15 : LOWER_ROW_Y;
 
 		return {
 			game: {x: baseX, y: baseY, width: GAME_WIDTH, height: GAME_HEIGHT},
@@ -95,7 +97,7 @@ const FourPlayer = () => {
 				x={10}
 				y={160}
 				w={420}
-				h={835}
+				h={CONTENT_BOTTOM - 160}
 			>
 				<Category
 					fontSize={72}

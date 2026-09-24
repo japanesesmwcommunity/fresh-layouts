@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {Runner} from "../../../nodecg/generated/currentRun";
 import iconTwitch from "../image/icon/twitch.svg";
 
-const NAMEPLATE_HEIGHT = 60;
+export const NAMEPLATE_HEIGHT = 60;
 const SWITCH_INTERVAL = 20000;
 
 const Container = styled.div<{
