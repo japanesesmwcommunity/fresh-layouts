@@ -43,16 +43,16 @@ export const Timer = (props: {
 	const color = (): string => {
 		if (timer) {
 			if (timer.state === "Running") {
-				return "rgb(0, 186, 69)";
+				return "#80d5e7";
 			}
 
 			if (timer.state === "Paused") {
 				return "rgb(230, 176, 0)";
 			}
 
-			return "#525252";
+			return "#b0b0b0";
 		}
-		return "#525252";
+		return "#b0b0b0";
 	};
 
 	return (
