@@ -1,0 +1,11 @@
+{
+	"googleApiKey": "REPLACE_WITH_GOOGLE_API_KEY",
+	"spreadsheetId": "REPLACE_WITH_SPREADSHEET_ID",
+	"twitch": {
+		"clientId": "REPLACE_WITH_TWITCH_CLIENT_ID",
+		"clientSecret": "REPLACE_WITH_TWITCH_CLIENT_SECRET",
+		"broadcasterId": "REPLACE_WITH_TWITCH_USER_ID",
+		"refreshToken": "REPLACE_WITH_TWITCH_REFRESH_TOKEN",
+		"tokenFile": "db/fresh-layouts/twitch-token.json"
+	}
+}

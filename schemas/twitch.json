@@ -1,0 +1,40 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "TwitchPayload",
+	"oneOf": [
+		{"$ref": "#/definitions/TwitchCategory"},
+		{"$ref": "#/definitions/TwitchChannel"},
+		{"$ref": "#/definitions/TwitchUpdate"}
+	],
+	"definitions": {
+		"TwitchCategory": {
+			"title": "TwitchCategory",
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {"id": {"type": "string"}, "name": {"type": "string"}},
+			"required": ["id", "name"]
+		},
+		"TwitchChannel": {
+			"title": "TwitchChannel",
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"broadcasterId": {"type": "string"},
+				"broadcasterName": {"type": "string"},
+				"title": {"type": "string"},
+				"category": {"$ref": "#/definitions/TwitchCategory"}
+			},
+			"required": ["broadcasterId", "broadcasterName", "title", "category"]
+		},
+		"TwitchUpdate": {
+			"title": "TwitchUpdate",
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {"type": "string", "minLength": 1, "maxLength": 140},
+				"gameId": {"type": "string", "pattern": "^(\\d+)?$"}
+			},
+			"required": ["title", "gameId"]
+		}
+	}
+}

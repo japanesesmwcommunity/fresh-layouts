@@ -4,6 +4,7 @@ import {Column, Container, Grid} from "../components/Dashboard";
 import {PlayerControl} from "../PlayerControl";
 import {theme} from "../theme";
 import {ControlTimer} from "../Timer";
+import {Twitch} from "../Twitch";
 
 export const Run = () => {
 	return (
@@ -13,6 +14,9 @@ export const Run = () => {
 					<Column>
 						<ControlTimer />
 						<PlayerControl />
+					</Column>
+					<Column>
+						<Twitch />
 					</Column>
 				</Grid>
 			</Container>

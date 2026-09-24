@@ -28,6 +28,32 @@ pnpm dev
 5. NodeCGを再起動します。
 6. 「情報管理」→「スプレッドシート取得」の「走者情報を取得」で取り込みます。既存の走者一覧は置き換わります。
 
+## Twitch連携
+
+`cfg/fresh-layouts.json` の `twitch` に設定します。未設定でも他のパネルは利用できます。
+
+```json
+{
+	"googleApiKey": "REPLACE_WITH_GOOGLE_API_KEY",
+	"spreadsheetId": "REPLACE_WITH_SPREADSHEET_ID",
+	"twitch": {
+		"clientId": "REPLACE_WITH_TWITCH_CLIENT_ID",
+		"clientSecret": "REPLACE_WITH_TWITCH_CLIENT_SECRET",
+		"broadcasterId": "REPLACE_WITH_TWITCH_USER_ID",
+		"refreshToken": "REPLACE_WITH_TWITCH_REFRESH_TOKEN",
+		"tokenFile": "db/fresh-layouts/twitch-token.json"
+	}
+}
+```
+
+配信するアカウント自身で、`channel:manage:broadcast` を許可したAuthorization Code GrantのRefresh Tokenを取得してください。任意で初回の `accessToken` も設定できます。取得方法は[Twitch公式認証ドキュメント](https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#authorization-code-grant-flow)を参照してください。
+
+extensionは起動時と1時間ごとに認証を検証し、401応答時にトークンを更新します。Client ID・配信者ID・必要な権限も検証します。Twitch設定はブラウザーに公開しません。更新されたトークンは `tokenFile` に保存します。このファイルと親ディレクトリへの書き込みを許可し、永続化してください。Railwayの既存構成では `db/` はVolumeに保存されます。設定のRefresh Tokenを変更すると保存済みトークンを使わず、新しい認証設定を使用します。
+
+配信情報パネルの「再取得」で現在の情報を取得し、タイトルと検索したカテゴリーを編集して「Twitchに反映」を押します。タイトルは1〜140文字です。カテゴリーの選択解除は未設定にします。
+
+API仕様：[配信情報の更新](https://dev.twitch.tv/docs/api/reference/#modify-channel-information)、[トークン検証](https://dev.twitch.tv/docs/authentication/validate-tokens/)、[トークン更新](https://dev.twitch.tv/docs/authentication/refresh-tokens/)。
+
 ## 検証
 
 ```sh

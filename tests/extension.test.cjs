@@ -17,6 +17,7 @@ const {
 	parseRunnerRows,
 	normalizeRunner,
 } = require("../src/extension/runner-data.ts");
+const {validateTwitchUpdate} = require("../src/extension/twitch-client.ts");
 
 test("走者シートの4列を読み込み空行を除外する", () => {
 	const runners = parseRunnerRows(
@@ -70,4 +71,24 @@ test("走者情報は編集可能なフィールドだけを返す", () => {
 		}),
 		{name: "走者", category: "Any%", message: " message ", twitchId: "runner"},
 	);
+});
+test("TwitchタイトルとカテゴリーIDの境界を検証する", () => {
+	assert.deepEqual(validateTwitchUpdate({title: " 配信 ", gameId: "509658"}), {
+		title: "配信",
+		gameId: "509658",
+	});
+	assert.equal(validateTwitchUpdate({title: "配信", gameId: ""}).gameId, "");
+	assert.equal(
+		[...validateTwitchUpdate({title: "🎮".repeat(140), gameId: "1"}).title]
+			.length,
+		140,
+	);
+	assert.throws(() =>
+		validateTwitchUpdate({title: "🎮".repeat(141), gameId: "1"}),
+	);
+	assert.throws(() => validateTwitchUpdate({title: " ", gameId: "1"}));
+	assert.throws(() =>
+		validateTwitchUpdate({title: "配信", gameId: "Game name"}),
+	);
+	assert.throws(() => validateTwitchUpdate(null));
 });

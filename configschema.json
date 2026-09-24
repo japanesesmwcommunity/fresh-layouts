@@ -1,11 +1,44 @@
 {
 	"$schema": "http://json-schema.org/draft-04/schema",
-
 	"type": "object",
 	"additionalProperties": false,
 	"default": {},
 	"properties": {
-		"googleApiKey": {"type": "string"},
-		"spreadsheetId": {"type": "string"}
+		"googleApiKey": {
+			"type": "string"
+		},
+		"spreadsheetId": {
+			"type": "string"
+		},
+		"twitch": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"clientId": {
+					"type": "string",
+					"minLength": 1
+				},
+				"clientSecret": {
+					"type": "string",
+					"minLength": 1
+				},
+				"broadcasterId": {
+					"type": "string",
+					"pattern": "^[0-9]+$"
+				},
+				"refreshToken": {
+					"type": "string",
+					"minLength": 1
+				},
+				"accessToken": {
+					"type": "string"
+				},
+				"tokenFile": {
+					"type": "string",
+					"default": "db/fresh-layouts/twitch-token.json"
+				}
+			},
+			"required": ["clientId", "clientSecret", "broadcasterId", "refreshToken"]
+		}
 	}
 }
