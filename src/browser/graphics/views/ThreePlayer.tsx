@@ -22,60 +22,15 @@ const GAP = 20; // 各枠の間のギャップ
 
 const ThreePlayer = () => {
 	const getPlayerPosition = (playerIndex: number) => {
-		// 逆L字レイアウトの配置計算
-		// Player 0: 上段右（右寄せ）, Player 1: 下段左, Player 2: 下段右
-		if (playerIndex === 0) {
-			// 上段右（右寄せ）
-			return {
-				game: {
-					x: GAME_OFFSET_X,
-					y: 15,
-					width: GAME_WIDTH,
-					height: GAME_HEIGHT,
-				},
-				nameplate: {
-					x: GAME_OFFSET_X + GAME_WIDTH + GAP,
-					y: 15 + GAME_HEIGHT + NAMEPLATE_OFFSET_Y,
-					width: GAME_WIDTH,
-				},
-			};
-		} else if (playerIndex === 1) {
-			// 下段左
-			return {
-				game: {
-					x: GAME_OFFSET_X + GAP + GAME_WIDTH,
-					y: 15,
-					width: GAME_WIDTH,
-					height: GAME_HEIGHT,
-				},
-				nameplate: {
-					x: GAME_OFFSET_X,
-					y: 15 + GAME_HEIGHT + NAMEPLATE_OFFSET_Y,
-					width: GAME_WIDTH,
-				},
-			};
-		} else if (playerIndex === 2) {
-			// 下段右
-			const bottomY = 15 + GAME_HEIGHT + 80 + GAP; // 上段 + nameplate高さ + ギャップ
-			return {
-				game: {
-					x: GAME_OFFSET_X,
-					y: bottomY,
-					width: GAME_WIDTH,
-					height: GAME_HEIGHT,
-				},
-				nameplate: {
-					x: GAME_OFFSET_X,
-					y: bottomY + GAME_HEIGHT + NAMEPLATE_OFFSET_Y,
-					width: GAME_WIDTH,
-				},
-			};
-		}
-
-		// フォールバック（使用されない）
+		const x = playerIndex === 1 ? GAME_OFFSET_X + GAME_WIDTH + GAP : GAME_OFFSET_X;
+		const y = playerIndex === 2 ? 15 + GAME_HEIGHT + 80 + GAP : 15;
 		return {
-			game: {x: 0, y: 0, width: GAME_WIDTH, height: GAME_HEIGHT},
-			nameplate: {x: 0, y: 0, width: GAME_WIDTH},
+			game: {x, y, width: GAME_WIDTH, height: GAME_HEIGHT},
+			nameplate: {
+				x,
+				y: y + GAME_HEIGHT + NAMEPLATE_OFFSET_Y,
+				width: GAME_WIDTH,
+			},
 		};
 	};
 
