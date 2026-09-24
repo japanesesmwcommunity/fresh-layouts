@@ -20,7 +20,6 @@ const MessagesContainer = styled.div<{
 	background-color: rgba(0, 0, 0, 0.8);
 	color: white;
 	padding: 16px 20px;
-	border-radius: 16px;
 	border: 3px solid #fff;
 	font-size: ${(props) => props.fontSize ?? 24}px;
 	line-height: 1.4;
