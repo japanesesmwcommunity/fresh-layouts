@@ -3,8 +3,7 @@ import {useEffect, useState} from "react";
 import {Runner} from "../../../nodecg/generated/currentRun";
 import iconTwitch from "../image/icon/twitch.svg";
 
-// 定数をコンポーネント外で定義
-const NAMEPLATE_HEIGHT = 70;
+const NAMEPLATE_HEIGHT = 60;
 const SWITCH_INTERVAL = 20000;
 
 const Container = styled.div<{
@@ -19,24 +18,27 @@ const Container = styled.div<{
 	height: ${NAMEPLATE_HEIGHT}px;
 	background-color: rgba(0, 0, 0, 0.7);
 	color: white;
-	padding: 8px 16px;
+	padding: 4px 16px;
 	border-radius: 4px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	font-size: 48px;
+	font-size: 40px;
+	line-height: 1;
 `;
 
 const NameSection = styled.div<{isVisible: boolean}>`
 	opacity: ${(props) => (props.isVisible ? 1 : 0)};
-	/* TODO: 削除検討 */
-	transform: translateY(${(props) => (props.isVisible ? "0px" : "0px")});
-	transition:
-		opacity 1.4s ease-in-out,
-		transform 1.4s ease-in-out;
-	display: flex;
-	align-items: center;
-	gap: 8px;
+	transition: opacity 1.4s ease-in-out;
+	position: relative;
+	height: 40px;
+	line-height: 40px;
+`;
+
+const NameText = styled.span<{withIcon: boolean}>`
+	display: block;
+	padding-left: ${(props) => (props.withIcon ? 44 : 0)}px;
+	white-space: nowrap;
 `;
 
 const TimeSection = styled.div`
@@ -44,8 +46,13 @@ const TimeSection = styled.div`
 `;
 
 const TwitchIcon = styled.img`
-	width: 40px;
-	height: 40px;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	display: block;
+	width: 36px;
+	height: 36px;
 `;
 
 export const Nameplate = (props: {
@@ -58,19 +65,16 @@ export const Nameplate = (props: {
 	const [isTransitioning, setIsTransitioning] = useState(false);
 
 	useEffect(() => {
-		// twitchIdが存在しない場合は切り替えない
+		setShowName(true);
+		setIsTransitioning(false);
 		if (!props.runner.twitchId) return;
 
 		const interval = setInterval(() => {
 			setIsTransitioning(true);
-			setTimeout(() => {
-				setShowName((prev) => !prev);
-				setIsTransitioning(false);
-			}, 700); // アニメーションの半分の時間でコンテンツを切り替え
 		}, SWITCH_INTERVAL);
 
 		return () => clearInterval(interval);
-	}, [props.runner.twitchId]);
+	}, [props.runner.id, props.runner.name, props.runner.twitchId]);
 
 	const currentText = showName ? props.runner.name : props.runner.twitchId;
 
@@ -80,14 +84,28 @@ export const Nameplate = (props: {
 			y={props.y}
 			width={props.w}
 		>
-			<NameSection isVisible={!isTransitioning}>
+			<NameSection
+				isVisible={!isTransitioning}
+				onTransitionEnd={(event) => {
+					if (
+						event.target !== event.currentTarget ||
+						event.propertyName !== "opacity" ||
+						!isTransitioning
+					)
+						return;
+					setShowName((prev) => !prev);
+					setIsTransitioning(false);
+				}}
+			>
 				{!showName && props.runner.twitchId && (
 					<TwitchIcon
 						src={iconTwitch}
 						alt='Twitch'
 					/>
 				)}
-				<span>{currentText}</span>
+				<NameText withIcon={!showName && !!props.runner.twitchId}>
+					{currentText}
+				</NameText>
 			</NameSection>
 			<TimeSection>
 				{props.runner.finishTime && <span>{props.runner.finishTime}</span>}
