@@ -1,62 +1,11 @@
-import {sheets} from "@googleapis/sheets";
 import {klona} from "klona";
 import {Run, Runner} from "../nodecg/generated/schedule";
 import {ServerNodecgInstance} from "../nodecg/nodecg";
 
-interface BundleConfig {
-	googleApiKey?: string;
-	spreadsheetId?: string;
-}
-
 export default (nodecg: ServerNodecgInstance) => {
 	const scheduleRep = nodecg.Replicant("schedule");
 	const currentRunRep = nodecg.Replicant("currentRun");
-	const runnersRep = nodecg.Replicant("runners");
 	const timerRep = nodecg.Replicant("timer");
-
-	const {googleApiKey, spreadsheetId} = nodecg.bundleConfig as BundleConfig;
-	const sheetsApi = sheets({version: "v4", auth: googleApiKey});
-
-	const getRunnersData = async () => {
-		if (!runnersRep.value) {
-			nodecg.log.error("runner replicant does not exist.");
-			return;
-		}
-
-		try {
-			const res = await sheetsApi.spreadsheets.values.batchGet({
-				spreadsheetId: spreadsheetId,
-				ranges: ["本番用データ"],
-			});
-			const sheetValues = res.data.valueRanges;
-			if (!sheetValues?.[0]?.values) {
-				nodecg.log.error("スプレッドシートデータの取得に失敗しました。");
-				return;
-			}
-			const [_, ...data] = sheetValues[0].values;
-
-			const maxId =
-				runnersRep.value.length > 0
-					? Math.max(...runnersRep.value.map((runner) => runner.id))
-					: 0;
-
-			const rawData = data.map((content, index) => {
-				return {
-					id: maxId + index + 1,
-					name: content[0],
-					twitchId: content[1],
-					message: content[2],
-				};
-			});
-
-			if (rawData.length > 0) {
-				runnersRep.value = rawData;
-				nodecg.log.info("走者データを取得しました。");
-			}
-		} catch (e: any) {
-			nodecg.log.error(e.message);
-		}
-	};
 
 	const addSchedule = (run: Run) => {
 		if (!scheduleRep.value) {
@@ -157,6 +106,4 @@ export default (nodecg: ServerNodecgInstance) => {
 	nodecg.listenFor("current-run:set", setCurrentRun);
 	nodecg.listenFor("current-run:player-confirm", confirmRun);
 	nodecg.listenFor("current-run:player-undo", undoConfirmRun);
-
-	nodecg.listenFor("runners:get", getRunnersData);
 };

@@ -3,6 +3,7 @@ import {render} from "../../render";
 import {Column, Grid} from "../components/Dashboard";
 import {Runners} from "../Runners";
 import {Schedule} from "../Schedule";
+import {Spreadsheet} from "../Spreadsheet";
 import {theme} from "../theme";
 
 const App = () => {
@@ -16,6 +17,9 @@ const App = () => {
 					</Column>
 					<Column>
 						<Schedule />
+					</Column>
+					<Column>
+						<Spreadsheet />
 					</Column>
 				</Grid>
 			</ThemeProvider>

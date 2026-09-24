@@ -11,7 +11,9 @@
 		"dev:vite": "vite",
 		"dev:nodecg": "nodecg start",
 		"generate-schema-types": "nodecg schema-types -o ./src/nodecg/generated",
-		"build": "pnpm run generate-schema-types && vite build"
+		"build": "pnpm run generate-schema-types && vite build",
+		"test": "node --test tests/*.test.cjs",
+		"typecheck": "tsc -p src/extension/tsconfig.json --incremental false && tsc -p src/browser/tsconfig.json --incremental false"
 	},
 	"nodecg": {
 		"compatibleRange": "^2.0.0",

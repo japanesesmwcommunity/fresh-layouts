@@ -1,3 +1,4 @@
+import {CurrentRun} from "./generated/currentRun";
 import {Runners} from "./generated/runners";
 import {Schedule} from "./generated/schedule";
 import {Timer} from "./generated/timer";
@@ -16,7 +17,7 @@ type ReplicantMap = {
 	"assets:test": Assets[];
 	schedule: Schedule;
 	timer: Timer;
-	currentRun: Run;
+	currentRun: CurrentRun;
 	runners: Runners;
 };
 

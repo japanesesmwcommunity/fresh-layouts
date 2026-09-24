@@ -20,12 +20,21 @@ pnpm dev
 1. Google CloudでGoogle Sheets APIを有効にし、APIキーを取得します。
 2. スプレッドシートを「リンクを知っている全員・閲覧者」で共有します。
 3. シートを次の形式で作成します。
-   - シート名：`本番用データ`
-   - 1行目：見出し
-   - 2行目以降：A列に走者名、B列にTwitch ID、C列にメッセージ
+   - シート名：`走者`
+   - 1行目：A列 `name`、B列 `category`、C列 `message`、D列 `twitch_id`
+   - 2行目以降：走者名、カテゴリー、メッセージ、Twitch IDの順で1行につき1人を入力
+   - 列の位置で読み込むため、この順序を維持する
 4. `cfg/fresh-layouts.json` に `googleApiKey` と `spreadsheetId` を設定します。
 5. NodeCGを再起動します。
-6. 「情報管理」→「走者一覧」の「更新」で取り込みます。既存の走者一覧は置き換わります。
+6. 「情報管理」→「スプレッドシート取得」の「走者情報を取得」で取り込みます。既存の走者一覧は置き換わります。
+
+## 検証
+
+```sh
+pnpm test
+pnpm run typecheck
+pnpm build
+```
 
 ## デプロイ
 
