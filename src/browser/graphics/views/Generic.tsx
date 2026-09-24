@@ -6,7 +6,7 @@ import {Overlay} from "./OverlayTemplate";
 const Generic = () => {
 	return (
 		<Overlay>
-			<Footer>RTA新人大会 - 新人の部</Footer>
+			<Footer>RTA新人大会</Footer>
 		</Overlay>
 	);
 };
