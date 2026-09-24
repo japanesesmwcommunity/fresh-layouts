@@ -15,6 +15,7 @@ import {Overlay} from "./OverlayTemplate";
 const GAME_WIDTH = 720; // 2x2レイアウトでの個別ゲーム画面の幅
 const GAME_HEIGHT = (GAME_WIDTH / 16) * 9;
 const CONTENT_BOTTOM = 995;
+const CATEGORY_AND_TIMER_Y = 765;
 const LOWER_ROW_Y = CONTENT_BOTTOM - GAME_HEIGHT - NAMEPLATE_HEIGHT;
 const NAMEPLATE_OFFSET_Y = 0; // ゲーム画面からのオフセット
 const GAP = 20; // 各枠の間のギャップ
@@ -100,9 +101,9 @@ const FourPlayer = () => {
 			/>
 			<CategoryAndTimer
 				x={10}
-				y={765}
+				y={CATEGORY_AND_TIMER_Y}
 				w={420}
-				h={240}
+				h={CONTENT_BOTTOM - CATEGORY_AND_TIMER_Y}
 				category={currentRun?.title}
 			/>
 			<Footer>RTA新人大会 {currentRun?.type}</Footer>
