@@ -114,8 +114,10 @@ const ThreePlayer = () => {
 				return null;
 			})}
 			<Logo
-				w={400}
-				h={400}
+				w={600}
+                h={120}
+                x={-45}
+                y={40}
 			/>
 			<InfoBox
 				x={10}
