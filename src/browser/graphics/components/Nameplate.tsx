@@ -20,7 +20,6 @@ const Container = styled.div<{
 	background-color: rgba(0, 0, 0, 0.7);
 	color: white;
 	padding: 4px 16px;
-	border-radius: 4px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
