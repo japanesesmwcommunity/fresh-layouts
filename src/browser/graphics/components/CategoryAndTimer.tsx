@@ -11,13 +11,14 @@ const Container = styled.div<{x: number; y: number; w: number; h: number}>`
 	width: ${(props) => props.w}px;
 	height: ${(props) => props.h}px;
 	box-sizing: border-box;
-	padding: 12px 20px;
+	padding: 8px 20px;
 	background-color: rgb(20 20 20 / 80%);
 	border: 3px solid ${OUTLINE_COLOR};
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	gap: 12px;
+	gap: 8px;
+	line-height: 1.1;
 `;
 
 const Separator = styled.hr`
@@ -42,6 +43,9 @@ export const CategoryAndTimer = (props: {
 	>
 		<Category>{props.category}</Category>
 		<Separator />
-		<Timer fontSize={90} />
+		<Timer
+			fontSize={90}
+			textAlign="center"
+		/>
 	</Container>
 );

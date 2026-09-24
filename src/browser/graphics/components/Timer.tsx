@@ -8,6 +8,7 @@ const TimerContainer = styled.div<{
 	x?: number;
 	y?: number;
 	width?: number;
+	textAlign?: "left" | "center" | "right";
 }>`
 	font-family: "Google Sans Flex Variable", sans-serif;
 	font-weight: 900;
@@ -23,7 +24,7 @@ const TimerContainer = styled.div<{
 			: props.x !== undefined || props.y !== undefined
 				? "350px"
 				: "100%"};
-	text-align: right;
+	text-align: ${(props) => props.textAlign ?? "right"};
 	transition:
 		text-shadow 0.3s ease,
 		color 0.3s ease;
@@ -35,6 +36,7 @@ export const Timer = (props: {
 	x?: number;
 	y?: number;
 	width?: number;
+	textAlign?: "left" | "center" | "right";
 }) => {
 	const timer = useReplicant("timer");
 
@@ -60,6 +62,7 @@ export const Timer = (props: {
 			x={props.x}
 			y={props.y}
 			width={props.width}
+			textAlign={props.textAlign}
 		>
 			{timer?.formattedTime}
 		</TimerContainer>

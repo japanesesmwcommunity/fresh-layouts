@@ -80,13 +80,13 @@ const ThreePlayer = () => {
 				x={10}
 				y={160}
 				w={420}
-				h={515}
+				h={585}
 			/>
 			<CategoryAndTimer
 				x={10}
-				y={695}
+				y={765}
 				w={420}
-				h={CONTENT_BOTTOM - 695}
+				h={240}
 				category={currentRun?.title}
 			/>
 			<RunnerMessages
